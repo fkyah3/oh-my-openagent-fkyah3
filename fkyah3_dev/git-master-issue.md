@@ -36,6 +36,7 @@ export : 无法将"export"项识别为 cmdlet、函数、脚本文件或可运�
 | 文件 | 改动前 | 改动后 |
 |------|--------|--------|
 | `src/config/schema/git-env-prefix.ts` | `.default("GIT_MASTER=1")` | `.default("")` |
+| `src/features/opencode-skill-loader/git-master-template-injection.ts` | `config?.git_env_prefix ?? "GIT_MASTER=1"` | `config?.git_env_prefix ?? ""` |
 | `src/hooks/keyword-detector/ultrawork/default.ts` | `load_skills=["git-master"]` | `load_skills=[]` |
 
 另外在 `oh-my-openagent.json` 配置中添加：
@@ -59,3 +60,4 @@ export : 无法将"export"项识别为 cmdlet、函数、脚本文件或可运�
 
 - `775201dc` — 首次修复：Windows PowerShell 检测后注入平台语法（`$env:KEY="val"`）
 - `7a63185b` — 根本修复：默认前缀改为空、ultrawork 指令去除硬编码
+- `be8a86f5` — 补充修复：`injectGitMasterConfig` 中硬编码的 `?? "GIT_MASTER=1"` 后备值改为 `""`
