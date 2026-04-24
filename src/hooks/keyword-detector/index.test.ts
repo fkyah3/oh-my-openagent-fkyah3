@@ -75,7 +75,7 @@ describe("keyword-detector message transform", () => {
     expect(textPart).toBeDefined()
     expect(textPart!.text).toContain("---")
     expect(textPart!.text).toContain("for the bug")
-    expect(textPart!.text).toContain("[search-mode]")
+    expect(textPart!.text).toContain("最大化搜索效率")
   })
 
   test("should NOT transform when no keywords detected", async () => {
@@ -389,7 +389,7 @@ Please locate and scan the directory.
     // then - should NOT trigger search mode (text should remain unchanged)
     const textPart = output.parts.find(p => p.type === "text")
     expect(textPart).toBeDefined()
-    expect(textPart!.text).not.toContain("[search-mode]")
+    expect(textPart!.text).not.toContain("最大化搜索效率")
     expect(textPart!.text).toContain("<system-reminder>")
   })
 
@@ -415,7 +415,7 @@ Research the implementation details.
     // then - should NOT trigger analyze mode
     const textPart = output.parts.find(p => p.type === "text")
     expect(textPart).toBeDefined()
-    expect(textPart!.text).not.toContain("[analyze-mode]")
+    expect(textPart!.text).not.toContain("分析模式")
     expect(textPart!.text).toContain("<system-reminder>")
   })
 
@@ -442,7 +442,7 @@ Please search for the bug in the code.`
     // then - should trigger search mode from user text only
     const textPart = output.parts.find(p => p.type === "text")
     expect(textPart).toBeDefined()
-    expect(textPart!.text).toContain("[search-mode]")
+    expect(textPart!.text).toContain("最大化搜索效率")
     expect(textPart!.text).toContain("Please search for the bug in the code.")
   })
 
@@ -473,8 +473,8 @@ Second reminder with investigate and examine keywords.
     // then - should NOT trigger any mode (only user text exists, no keywords)
     const textPart = output.parts.find(p => p.type === "text")
     expect(textPart).toBeDefined()
-    expect(textPart!.text).not.toContain("[search-mode]")
-    expect(textPart!.text).not.toContain("[analyze-mode]")
+    expect(textPart!.text).not.toContain("最大化搜索效率")
+    expect(textPart!.text).not.toContain("分析模式")
   })
 
   test("should handle case-insensitive system-reminder tags", async () => {
@@ -498,7 +498,7 @@ System will search and find files.
     // then - should NOT trigger search mode
     const textPart = output.parts.find(p => p.type === "text")
     expect(textPart).toBeDefined()
-    expect(textPart!.text).not.toContain("[search-mode]")
+    expect(textPart!.text).not.toContain("最大化搜索效率")
   })
 
   test("should handle multiline system-reminder content with search keywords", async () => {
@@ -527,7 +527,7 @@ Please explore the codebase and discover patterns.
     // then - should NOT trigger search mode
     const textPart = output.parts.find(p => p.type === "text")
     expect(textPart).toBeDefined()
-    expect(textPart!.text).not.toContain("[search-mode]")
+    expect(textPart!.text).not.toContain("最大化搜索效率")
   })
 })
 
@@ -850,6 +850,6 @@ describe("keyword-detector non-OMO agent skipping", () => {
     const textPart = output.parts.find(p => p.type === "text")
     expect(textPart).toBeDefined()
     expect(textPart!.text).toBe("search this codebase")
-    expect(textPart!.text).not.toContain("[search-mode]")
+    expect(textPart!.text).not.toContain("最大化搜索效率")
   })
 })
