@@ -22,7 +22,7 @@ import { buildStartWorkContextInfo } from "./context-info-builder"
 import { createWorktreeActiveBlock } from "./worktree-block"
 
 export const HOOK_NAME = "start-work" as const
-const START_WORK_TEMPLATE_MARKER = "You are starting a Sisyphus work session."
+const START_WORK_TEMPLATE_MARKER = "你正在开始一个 Sisyphus 工作会话。"
 
 interface StartWorkHookInput {
   sessionID: string

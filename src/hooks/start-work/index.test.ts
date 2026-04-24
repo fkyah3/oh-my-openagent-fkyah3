@@ -36,7 +36,7 @@ describe("start-work hook", () => {
     const userRequest = options?.userRequest ?? ""
 
     return `<command-instruction>
-You are starting a Sisyphus work session.
+你正在开始一个 Sisyphus 工作会话。
 </command-instruction>
 
 <session-context>${sessionContext}</session-context>${userRequest ? `

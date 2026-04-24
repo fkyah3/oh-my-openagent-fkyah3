@@ -962,8 +962,8 @@ describe("ralph-loop", () => {
       // containing `<promise>DONE</promise>` is recorded as a user message and
       // falsely triggers completion detection
       const transcriptPath = join(TEST_DIR, "transcript.jsonl")
-      const templateText = `You are starting a Ralph Loop...
-Output <promise>DONE</promise> when fully complete`
+      const templateText = `你正在启动一个 Ralph 循环...
+完全完成时输出 <promise>DONE</promise>`
       const userEntry = JSON.stringify({
         type: "user",
         timestamp: new Date().toISOString(),
