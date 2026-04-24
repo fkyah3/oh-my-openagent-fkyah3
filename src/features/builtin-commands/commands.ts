@@ -2,6 +2,7 @@ import type { CommandDefinition } from "../claude-code-command-loader"
 import { isAgentRegistered } from "../claude-code-session-state"
 import type { BuiltinCommandName, BuiltinCommands } from "./types"
 import { INIT_DEEP_TEMPLATE } from "./templates/init-deep"
+import { getPromptVersionTemplate } from "./templates/prompt-version"
 import { RALPH_LOOP_TEMPLATE, ULW_LOOP_TEMPLATE, CANCEL_RALPH_TEMPLATE } from "./templates/ralph-loop"
 import { STOP_CONTINUATION_TEMPLATE } from "./templates/stop-continuation"
 import { REFACTOR_TEMPLATE } from "./templates/refactor"
@@ -104,6 +105,12 @@ ${REMOVE_AI_SLOPS_TEMPLATE}
 <user-request>
 $ARGUMENTS
 </user-request>`,
+    },
+    "prompt-version": {
+      description: "(builtin) Show the current prompt revision loaded at build time",
+      template: `<command-instruction>
+${getPromptVersionTemplate()}
+</command-instruction>`,
     },
     handoff: {
       description: "(builtin) Create a detailed context summary for continuing work in a new session",
