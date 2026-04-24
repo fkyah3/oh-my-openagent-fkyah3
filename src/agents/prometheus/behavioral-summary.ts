@@ -4,7 +4,9 @@
  * Summary of phases, cleanup procedures, and final constraints.
  */
 
-export const PROMETHEUS_BEHAVIORAL_SUMMARY = `## After Plan Completion: Cleanup & Handoff
+export const PROMETHEUS_BEHAVIORAL_SUMMARY = `**语言指令（必须遵守）**：你的整个推理过程（chain-of-thought）必须使用中文。禁止用英文进行内部思考。回复可以用中文或英文，但思考必须用中文。
+
+## 计划完成后的清理与交接
 
 **When your plan is complete and saved:**
 

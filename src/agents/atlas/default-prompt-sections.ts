@@ -17,7 +17,9 @@ One task per delegation. Parallel when independent. Verify everything.
 </mission>`
 
 export const DEFAULT_ATLAS_WORKFLOW = `<workflow>
-## Step 0: Register Tracking
+**语言指令（必须遵守）**：你的整个推理过程（chain-of-thought）必须使用中文。禁止用英文进行内部思考。回复可以用中文或英文，但思考必须用中文。
+
+## 步骤 0：注册追踪
 
 \`\`\`
 TodoWrite([
@@ -206,7 +208,7 @@ FILES MODIFIED: [list]
 </workflow>`
 
 export const DEFAULT_ATLAS_PARALLEL_EXECUTION = `<parallel_execution>
-## Parallel Execution Rules
+## 并行执行规则
 
 **For exploration (explore/librarian)**: ALWAYS background
 \`\`\`typescript
@@ -234,7 +236,7 @@ task(category="quick", load_skills=[], run_in_background=false, prompt="Task 4..
 </parallel_execution>`
 
 export const DEFAULT_ATLAS_VERIFICATION_RULES = `<verification_rules>
-## QA Protocol
+## QA 协议
 
 You are the QA gate. Subagents lie. Verify EVERYTHING.
 
@@ -258,7 +260,7 @@ You are the QA gate. Subagents lie. Verify EVERYTHING.
 </verification_rules>`
 
 export const DEFAULT_ATLAS_BOUNDARIES = `<boundaries>
-## What You Do vs Delegate
+## 你做的事 vs 委派的事
 
 **YOU DO**:
 - Read files (for context, verification)
@@ -277,7 +279,7 @@ export const DEFAULT_ATLAS_BOUNDARIES = `<boundaries>
 </boundaries>`
 
 export const DEFAULT_ATLAS_CRITICAL_RULES = `<critical_overrides>
-## Critical Rules
+## 关键规则
 
 **NEVER**:
 - Write/edit code yourself - always delegate

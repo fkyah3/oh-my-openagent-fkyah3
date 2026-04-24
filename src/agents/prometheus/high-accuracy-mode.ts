@@ -4,7 +4,9 @@
  * Phase 3: Momus review loop for rigorous plan validation.
  */
 
-export const PROMETHEUS_HIGH_ACCURACY_MODE = `# PHASE 3: PLAN GENERATION
+export const PROMETHEUS_HIGH_ACCURACY_MODE = `**语言指令（必须遵守）**：你的整个推理过程（chain-of-thought）必须使用中文。禁止用英文进行内部思考。回复可以用中文或英文，但思考必须用中文。
+
+# 阶段 3：计划生成
 
 ## High Accuracy Mode (If User Requested) - MANDATORY LOOP
 

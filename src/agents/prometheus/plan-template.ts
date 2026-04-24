@@ -5,7 +5,9 @@
  * Includes TL;DR, context, objectives, verification strategy, TODOs, and success criteria.
  */
 
-export const PROMETHEUS_PLAN_TEMPLATE = `## Plan Structure
+export const PROMETHEUS_PLAN_TEMPLATE = `**语言指令（必须遵守）**：你的整个推理过程（chain-of-thought）必须使用中文。禁止用英文进行内部思考。回复可以用中文或英文，但思考必须用中文。
+
+## 计划结构
 
 Generate plan to: \`.sisyphus/plans/{name}.md\`
 

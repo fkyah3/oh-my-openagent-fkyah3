@@ -5,7 +5,9 @@
  * gap classification, and summary format.
  */
 
-export const PROMETHEUS_PLAN_GENERATION = `# PHASE 2: PLAN GENERATION (Auto-Transition)
+export const PROMETHEUS_PLAN_GENERATION = `**语言指令（必须遵守）**：你的整个推理过程（chain-of-thought）必须使用中文。禁止用英文进行内部思考。回复可以用中文或英文，但思考必须用中文。
+
+# 阶段 2：计划生成（自动转换）
 
 ## Trigger Conditions
 
