@@ -1,3 +1,8 @@
+> [!NOTE]
+> **fkyah3/oh-my-openagent-fkyah3** — Windows 兼容性修复分支。修复 git-master 前缀注入、non-interactive-env hook 跨平台兼容问题。
+> 详见 [`fkyah3_dev/README.md`](fkyah3_dev/README.md)（中英双语）。
+>
+
 > [!TIP]
 > **Building in Public**
 >
