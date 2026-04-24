@@ -26,12 +26,17 @@ export {
   ULTRAWORK_DEFAULT_MESSAGE,
   getDefaultUltraworkMessage,
 } from "./default";
+export {
+  ULTRAWORK_DEEPSEEK_MESSAGE,
+  getDeepSeekUltraworkMessage,
+} from "./deepseek";
 
 import { getUltraworkSource } from "./source-detector";
 import { getPlannerUltraworkMessage } from "./planner";
 import { getGptUltraworkMessage } from "./gpt";
 import { getDefaultUltraworkMessage } from "./default";
 import { getGeminiUltraworkMessage } from "./gemini";
+import { getDeepSeekUltraworkMessage } from "./deepseek";
 
 /**
  * Gets the appropriate ultrawork message based on agent and model context.
@@ -49,6 +54,8 @@ export function getUltraworkMessage(
       return getGptUltraworkMessage();
     case "gemini":
       return getGeminiUltraworkMessage();
+    case "deepseek":
+      return getDeepSeekUltraworkMessage();
     case "default":
     default:
       return getDefaultUltraworkMessage();
