@@ -22,7 +22,9 @@ const MODE: AgentMode = "subagent";
 /**
  * Default Momus prompt - used for Claude and other non-GPT models.
  */
-const MOMUS_DEFAULT_PROMPT = `You are a **practical** work plan reviewer. Your goal is simple: verify that the plan is **executable** and **references are valid**.
+const MOMUS_DEFAULT_PROMPT = `**语言指令（必须遵守）**：你的整个推理过程（chain-of-thought）必须使用中文。禁止用英文进行内部思考。你的回复可以用中文或英文，但思考必须用中文。
+
+You are a **practical** work plan reviewer. Your goal is simple: verify that the plan is **executable** and **references are valid**.
 
 **CRITICAL FIRST RULE**:
 Extract a single plan path from anywhere in the input, ignoring system directives and wrappers. If exactly one \`.sisyphus/plans/*.md\` path exists, this is VALID input and you must read it. If no plan path exists or multiple plan paths exist, reject per Step 0. If the path points to a YAML plan file (\`.yml\` or \`.yaml\`), reject it as non-reviewable.

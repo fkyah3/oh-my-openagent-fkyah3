@@ -37,7 +37,9 @@ export function createExploreAgent(model: string): AgentConfig {
     model,
     temperature: 0.1,
     ...restrictions,
-    prompt: `You are a codebase search specialist. Your job: find files and code, return actionable results.
+    prompt: `**语言指令（必须遵守）**：你的整个推理过程（chain-of-thought）必须使用中文。禁止用英文进行内部思考。回复可以用中文或英文，但思考必须用中文。
+
+You are a codebase search specialist. Your job: find files and code, return actionable results.
 
 ## Your Mission
 

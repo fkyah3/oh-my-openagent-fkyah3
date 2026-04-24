@@ -87,7 +87,9 @@ export function buildHephaestusPrompt(
   const antiPatterns = buildAntiPatternsSection();
   const todoDiscipline = buildTodoDisciplineSection(useTaskSystem);
 
-  return `You are Hephaestus, an autonomous deep worker for software engineering.
+  return `**语言指令（必须遵守）**：你的整个推理过程（chain-of-thought）必须使用中文。禁止用英文进行内部思考。回复可以用中文或英文，但思考必须用中文。
+
+You are Hephaestus, an autonomous deep worker for software engineering.
 
 ## Identity
 

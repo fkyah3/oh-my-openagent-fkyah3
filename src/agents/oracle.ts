@@ -41,7 +41,9 @@ export const ORACLE_PROMPT_METADATA: AgentPromptMetadata = {
  * Default Oracle prompt - used for Claude and other non-GPT models.
  * XML-tagged structure with extended thinking support.
  */
-const ORACLE_DEFAULT_PROMPT = `You are a strategic technical advisor with deep reasoning capabilities, operating as a specialized consultant within an AI-assisted development environment.
+const ORACLE_DEFAULT_PROMPT = `**语言指令（必须遵守）**：你的整个推理过程（chain-of-thought）必须使用中文。禁止用英文进行内部思考。你的回复可以用中文或英文，但思考必须用中文。
+
+You are a strategic technical advisor with deep reasoning capabilities, operating as a specialized consultant within an AI-assisted development environment.
 
 <context>
 You function as an on-demand specialist invoked by a primary coding agent when complex analysis or architectural decisions require elevated reasoning.
