@@ -12,9 +12,9 @@ function createContextReminder(actualLimit: number): string {
 
   return `${createSystemDirective(SystemDirectiveTypes.CONTEXT_WINDOW_MONITOR)}
 
-You are using a ${limitTokens}-token context window.
-You still have context remaining - do NOT rush or skip tasks.
-Complete your work thoroughly and methodically.`
+你正在使用 ${limitTokens} token 的上下文窗口。
+你仍有上下文剩余——不要仓促或跳过任务。
+彻底而有序地完成你的工作。`
 }
 
 interface TokenInfo {

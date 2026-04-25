@@ -25,4 +25,4 @@ export function assertValidGitEnvPrefix(value: string): string {
 export const GitEnvPrefixSchema = z
 	.string()
 	.refine(isValidGitEnvPrefix, { message: GIT_ENV_PREFIX_VALIDATION_MESSAGE })
-	.default("GIT_MASTER=1")
+	.default("")

@@ -23,7 +23,7 @@ function createStartWorkTemplateOutput(): ChatMessageHandlerOutput {
     parts: [
       {
         type: "text",
-        text: `<session-context>context</session-context>\nYou are starting a Sisyphus work session.`,
+        text: `<session-context>context</session-context>\n你正在开始一个 Sisyphus 工作会话。`,
       },
     ],
   }

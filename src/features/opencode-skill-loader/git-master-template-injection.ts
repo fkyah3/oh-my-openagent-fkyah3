@@ -7,7 +7,7 @@ const INLINE_GIT_COMMAND_PATTERN = /([;&|()][ \t]*)git(?=[ \t]|$)/g
 export function injectGitMasterConfig(template: string, config?: GitMasterConfig): string {
 	const commitFooter = config?.commit_footer ?? true
 	const includeCoAuthoredBy = config?.include_co_authored_by ?? true
-	const gitEnvPrefix = assertValidGitEnvPrefix(config?.git_env_prefix ?? "GIT_MASTER=1")
+	const gitEnvPrefix = assertValidGitEnvPrefix(config?.git_env_prefix ?? "")
 
 	let result = gitEnvPrefix ? injectGitEnvPrefix(template, gitEnvPrefix) : template
 
@@ -29,6 +29,9 @@ export function injectGitMasterConfig(template: string, config?: GitMasterConfig
 }
 
 function injectGitEnvPrefix(template: string, prefix: string): string {
+	const isWin32 = process.platform === "win32"
+	// On PowerShell (win32), `export` does not exist — use `$env:KEY="val"` or bare `KEY=val` prefix syntax.
+	const psPrefix = isWin32 ? prefix.replace(/=/g, '="') + '"' : ""
 	const envPrefixSection = [
 		"## GIT COMMAND PREFIX (MANDATORY)",
 		"",
@@ -38,17 +41,22 @@ function injectGitEnvPrefix(template: string, prefix: string): string {
 		"This allows custom git hooks to detect when git-master skill is active.",
 		"",
 		"```bash",
-		`${prefix} git status`,
-		`${prefix} git add <files>`,
-		`${prefix} git commit -m "message"`,
-		`${prefix} git push`,
-		`${prefix} git rebase ...`,
-		`${prefix} git log ...`,
+		isWin32 ? `$env:${psPrefix}; git status` : `${prefix} git status`,
+		isWin32 ? `$env:${psPrefix}; git add <files>` : `${prefix} git add <files>`,
+		isWin32 ? `$env:${psPrefix}; git commit -m "message"` : `${prefix} git commit -m "message"`,
+		isWin32 ? `$env:${psPrefix}; git push` : `${prefix} git push`,
+		isWin32 ? `$env:${psPrefix}; git rebase ...` : `${prefix} git rebase ...`,
+		isWin32 ? `$env:${psPrefix}; git log ...` : `${prefix} git log ...`,
 		"```",
 		"",
+		isWin32
+			? "**Windows PowerShell note**: Use `$env:KEY=\"val\";` syntax. Do NOT use `export` — it will error."
+			: "",
 		"**NO EXCEPTIONS. Every `git` invocation must include this prefix.**",
 		`</git_env_prefix>`,
-	].join("\n")
+	]
+		.filter(Boolean)
+		.join("\n")
 
 	const modeDetectionMarker = "## MODE DETECTION (FIRST STEP)"
 	const markerIndex = template.indexOf(modeDetectionMarker)

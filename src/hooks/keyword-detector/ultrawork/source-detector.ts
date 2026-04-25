@@ -8,7 +8,7 @@
  * 4. Everything else (Claude, etc.) → default.ts
  */
 
-import { isGptModel, isGeminiModel } from "../../../agents/types"
+import { isDeepSeekModel, isGptModel, isGeminiModel } from "../../../agents/types"
 
 /**
  * Checks if agent is a planner-type agent.
@@ -33,10 +33,10 @@ export function isNonOmoAgent(agentName?: string): boolean {
   return lowerName.includes("builder") || lowerName === "plan"
 }
 
-export { isGptModel, isGeminiModel }
+export { isDeepSeekModel, isGptModel, isGeminiModel }
 
 /** Ultrawork message source type */
-export type UltraworkSource = "planner" | "gpt" | "gemini" | "default"
+export type UltraworkSource = "planner" | "gpt" | "gemini" | "deepseek" | "default"
 
 /**
  * Determines which ultrawork message source to use.
@@ -60,6 +60,12 @@ export function getUltraworkSource(
   if (modelID && isGeminiModel(modelID)) {
     return "gemini"
   }
+
+  // Priority 4: DeepSeek models
+  if (modelID && isDeepSeekModel(modelID)) {
+    return "deepseek"
+  }
+
   // Default: Claude and other models
   return "default"
 }

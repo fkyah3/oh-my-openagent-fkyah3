@@ -35,7 +35,7 @@ export async function resolveSubagentExecution(
   const { client, agentOverrides, userCategories } = executorCtx
 
   if (!args.subagent_type?.trim()) {
-    return { agentToUse: "", categoryModel: undefined, error: `Agent name cannot be empty.` }
+    return { agentToUse: "", categoryModel: undefined, error: `Agent 名称不能为空。` }
   }
 
   const agentName = sanitizeSubagentType(args.subagent_type)
@@ -44,9 +44,9 @@ export async function resolveSubagentExecution(
     return {
       agentToUse: "",
       categoryModel: undefined,
-      error: `Cannot use subagent_type="${SISYPHUS_JUNIOR_AGENT}" directly. Use category parameter instead (e.g., ${categoryExamples}).
+      error: `不能直接使用 subagent_type="${SISYPHUS_JUNIOR_AGENT}"。请改用 category 参数（例如 ${categoryExamples}）。
 
-Sisyphus-Junior is spawned automatically when you specify a category. Pick the appropriate category for your task domain.`,
+当你指定 category 时，Sisyphus-Junior 会自动生成。选择适合你任务领域的 category。`,
     }
   }
 
@@ -54,9 +54,9 @@ Sisyphus-Junior is spawned automatically when you specify a category. Pick the a
     return {
       agentToUse: "",
       categoryModel: undefined,
-    error: `You are a plan-family agent (plan/prometheus). You cannot delegate to other plan-family agents via task.
+      error: `你是 plan 族 agent（plan/prometheus）。不能通过 task 委派给其他 plan 族 agent。
 
-Create the work plan directly - that's your job as the planning agent.`,
+直接创建工作计划——这是你作为规划 agent 的工作。`,
     }
   }
 
@@ -77,7 +77,7 @@ Create the work plan directly - that's your job as the planning agent.`,
       return {
         agentToUse: "",
         categoryModel: undefined,
-        error: `Cannot delegate to primary agent "${stripAgentListSortPrefix(matchedPrimaryAgent.name)}" via task. Select that agent directly instead.`,
+        error: `不能通过 task 委派给主 agent "${stripAgentListSortPrefix(matchedPrimaryAgent.name)}"。请直接选择该 agent。`,
       }
     }
 
@@ -86,7 +86,7 @@ Create the work plan directly - that's your job as the planning agent.`,
       return {
         agentToUse: "",
         categoryModel: undefined,
-        error: `Unknown agent: "${agentToUse}". Available agents: ${listCallableAgentNames(mergedAgents)}`,
+        error: `未知 agent: "${agentToUse}"。可用 agent：${listCallableAgentNames(mergedAgents)}`,
       }
     }
 
@@ -195,7 +195,7 @@ Create the work plan directly - that's your job as the planning agent.`,
     return {
       agentToUse: "",
       categoryModel: undefined,
-      error: `Failed to delegate to agent "${agentToUse}": ${errorMessage}`,
+      error: `委派给 agent "${agentToUse}" 失败：${errorMessage}`,
     }
   }
 

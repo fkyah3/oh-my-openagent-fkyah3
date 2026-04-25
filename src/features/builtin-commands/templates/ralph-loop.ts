@@ -1,66 +1,66 @@
-export const RALPH_LOOP_TEMPLATE = `You are starting a Ralph Loop - a self-referential development loop that runs until task completion.
+export const RALPH_LOOP_TEMPLATE = `你正在启动一个 Ralph 循环 —— 一个自我引用式开发循环，运行直到任务完成。
 
-## How Ralph Loop Works
+## Ralph 循环的工作方式
 
-1. You will work on the task continuously
-2. When you believe the task is FULLY complete, output: \`<promise>{{COMPLETION_PROMISE}}</promise>\`
-3. If you don't output the promise, the loop will automatically inject another prompt to continue
-4. Maximum iterations: Configurable (default 100)
+1. 你将持续处理任务
+2. 当你认为任务完全完成时，输出：\`<promise>{{COMPLETION_PROMISE}}</promise>\`
+3. 如果你没有输出承诺，循环会自动注入另一个提示以继续
+4. 最大迭代次数：可配置（默认 100）
 
-## Rules
+## 规则
 
-- Focus on completing the task fully, not partially
-- Don't output the completion promise until the task is truly done
-- Each iteration should make meaningful progress toward the goal
-- If stuck, try different approaches
-- Use todos to track your progress
+- 专注于完全完成任务，而非部分完成
+- 在任务真正完成之前不要输出完成承诺
+- 每次迭代都应该朝着目标取得有意义的进展
+- 如果卡住，尝试不同的方法
+- 使用待办清单跟踪进度
 
-## Exit Conditions
+## 退出条件
 
-1. **Completion**: Output your completion promise tag when fully complete
-2. **Max Iterations**: Loop stops automatically at limit
-3. **Cancel**: User runs \`/cancel-ralph\` command
+1. **完成**：完全完成时输出完成承诺标签
+2. **最大迭代**：达到限制时循环自动停止
+3. **取消**：用户运行 \`/cancel-ralph\` 命令
 
-## Your Task
+## 你的任务
 
-Parse the arguments below and begin working on the task. The format is:
-\`"task description" [--completion-promise=TEXT] [--max-iterations=N] [--strategy=reset|continue]\`
+解析下面的参数并开始处理任务。格式为：
+\`"任务描述" [--completion-promise=文本] [--max-iterations=N] [--strategy=reset|continue]\`
 
-Default completion promise is "DONE" and default max iterations is 100.`
+默认完成承诺是"DONE"，默认最大迭代次数是 100。`
 
-export const ULW_LOOP_TEMPLATE = `You are starting an ULTRAWORK Loop - a self-referential development loop that runs until verified completion.
+export const ULW_LOOP_TEMPLATE = `你正在启动一个 ULTRAWORK 循环 —— 一个自我引用式开发循环，运行直到验证完成。
 
-## How ULTRAWORK Loop Works
+## ULTRAWORK 循环的工作方式
 
-1. You will work on the task continuously
-2. When you believe the work is complete, output: \`<promise>{{COMPLETION_PROMISE}}</promise>\`
-3. That does NOT finish the loop yet. The system will require Oracle verification
-4. The loop only ends after the system confirms Oracle verified the result
-5. The iteration limit is 500 for ultrawork mode, 100 for normal mode
+1. 你将持续处理任务
+2. 当你认为工作完成时，输出：\`<promise>{{COMPLETION_PROMISE}}</promise>\`
+3. 这并不会完成循环。系统将要求 Oracle 验证
+4. 循环只在系统确认 Oracle 已验证结果后结束
+5. ultrawork 模式的迭代限制为 500，普通模式为 100
 
-## Rules
+## 规则
 
-- Focus on finishing the task completely
-- After you emit the completion promise, run Oracle verification when instructed
-- Do not treat DONE as final completion until Oracle verifies it
+- 专注于完全完成任务
+- 在你发出完成承诺后，按照指示运行 Oracle 验证
+- 在 Oracle 验证之前，不要将 DONE 视为最终完成
 
-## Exit Conditions
+## 退出条件
 
-1. **Verified Completion**: Oracle verifies the result and the system confirms it
-2. **Cancel**: User runs \`/cancel-ralph\`
+1. **已验证完成**：Oracle 验证结果并由系统确认
+2. **取消**：用户运行 \`/cancel-ralph\`
 
-## Your Task
+## 你的任务
 
-Parse the arguments below and begin working on the task. The format is:
-\`"task description" [--completion-promise=TEXT] [--strategy=reset|continue]\`
+解析下面的参数并开始处理任务。格式为：
+\`"任务描述" [--completion-promise=文本] [--strategy=reset|continue]\`
 
-Default completion promise is "DONE".`
+默认完成承诺是"DONE"。`
 
-export const CANCEL_RALPH_TEMPLATE = `Cancel the currently active Ralph Loop.
+export const CANCEL_RALPH_TEMPLATE = `取消当前活动的 Ralph 循环。
 
-This will:
-1. Stop the loop from continuing
-2. Clear the loop state file
-3. Allow the session to end normally
+这将：
+1. 停止循环继续
+2. 清除循环状态文件
+3. 允许会话正常结束
 
-Check if a loop is active and cancel it. Inform the user of the result.`
+检查是否有循环活动并取消它。告知用户结果。`

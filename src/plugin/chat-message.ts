@@ -26,7 +26,7 @@ export type ChatMessageInput = {
 type StartWorkHookOutput = { parts: Array<{ type: string; text?: string }> }
 
 type SessionModelOverride = { providerID: string; modelID: string }
-const START_WORK_TEMPLATE_MARKER = "You are starting a Sisyphus work session."
+const START_WORK_TEMPLATE_MARKER = "你正在开始一个 Sisyphus 工作会话。"
 
 type RawLoopCommand =
   | { command: "ralph-loop" | "ulw-loop"; args: string }
@@ -265,13 +265,13 @@ export function createChatMessageHandler(args: {
       const promptText = extractPromptText(parts)
 
       const isRalphLoopTemplate =
-        promptText.includes("You are starting a Ralph Loop") &&
+        promptText.includes("你正在启动一个 Ralph 循环") &&
         promptText.includes("<user-task>")
       const isUlwLoopTemplate =
-        promptText.includes("You are starting an ULTRAWORK Loop") &&
+        promptText.includes("你正在启动一个 ULTRAWORK 循环") &&
         promptText.includes("<user-task>")
       const isCancelRalphTemplate = promptText.includes(
-        "Cancel the currently active Ralph Loop",
+        "取消当前活动的 Ralph 循环",
       )
       const rawLoopCommand =
         !isRalphLoopTemplate && !isUlwLoopTemplate && !isCancelRalphTemplate

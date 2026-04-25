@@ -14,7 +14,7 @@ export function buildHardBlocksSection(): string {
     "- Delivering final answer before collecting Oracle result - **Never.**",
   ]
 
-  return `## Hard Blocks (NEVER violate)
+  return `## 硬性禁止（绝不可违反）
 
 ${blocks.join("\n")}`
 }
@@ -31,26 +31,26 @@ export function buildAntiPatternsSection(): string {
     "- **Oracle**: Delivering answer without collecting Oracle results",
   ]
 
-  return `## Anti-Patterns (BLOCKING violations)
+  return `## 反模式（阻塞性违规）
 
 ${patterns.join("\n")}`
 }
 
 export function buildToolCallFormatSection(): string {
-  return `## Tool Call Format (CRITICAL)
+  return `## 工具调用格式（关键）
 
-**ALWAYS use the native tool calling mechanism. NEVER output tool calls as text.**
+**始终使用原生工具调用机制。绝不要将工具调用以文本形式输出。**
 
-When you need to call a tool:
-1. Use the tool call interface provided by the system
-2. Do NOT write tool calls as plain text like \`assistant to=functions.XXX\`
-3. Do NOT output JSON directly in your text response
-4. The system handles tool call formatting automatically
+当需要调用工具时：
+1. 使用系统提供的工具调用接口
+2. 不要以纯文本形式写工具调用，如 \`assistant to=functions.XXX\`
+3. 不要在文本回复中直接输出 JSON
+4. 系统会自动处理工具调用格式
 
-**CORRECT**: Invoke the tool through the tool call interface
-**WRONG**: Writing \`assistant to=functions.todowrite\` or \`json\n{...}\` as text
+**正确**：通过工具调用接口调用工具
+**错误**：以文本形式写 \`assistant to=functions.todowrite\` 或 \`json\n{...}\`
 
-Your tool calls are processed automatically. Just invoke the tool - do not format the call yourself.`
+你的工具调用会自动处理。只管调用工具 —— 不要自己格式化调用。`
 }
 
 export function buildUltraworkSection(
@@ -61,7 +61,7 @@ export function buildUltraworkSection(
   const lines: string[] = []
 
   if (categories.length > 0) {
-    lines.push("**Categories** (for implementation tasks):")
+    lines.push("**分类**（用于实施任务）：")
     for (const category of categories) {
       const shortDescription = category.description || category.name
       lines.push(`- \`${category.name}\`: ${shortDescription}`)
@@ -74,7 +74,7 @@ export function buildUltraworkSection(
     const customSkills = skills.filter((skill) => skill.location !== "plugin")
 
     if (builtinSkills.length > 0) {
-      lines.push("**Built-in Skills** (combine with categories):")
+      lines.push("**内置技能**（可与分类组合使用）：")
       for (const skill of builtinSkills) {
         const shortDescription = skill.description.split(".")[0] || skill.description
         lines.push(`- \`${skill.name}\`: ${shortDescription}`)
@@ -83,7 +83,7 @@ export function buildUltraworkSection(
     }
 
     if (customSkills.length > 0) {
-      lines.push("**User-Installed Skills** (HIGH PRIORITY - user installed these for their workflow):")
+      lines.push("**用户安装的技能**（高优先级 —— 用户为其工作流程安装的）：")
       for (const skill of customSkills) {
         const shortDescription = skill.description.split(".")[0] || skill.description
         lines.push(`- \`${skill.name}\`: ${shortDescription}`)
@@ -109,7 +109,7 @@ export function buildUltraworkSection(
       return leftIndex - rightIndex
     })
 
-    lines.push("**Agents** (for specialized consultation/exploration):")
+    lines.push("**Agent**（用于专业咨询/探索）：")
     for (const agent of sortedAgents) {
       const shortDescription =
         agent.description.length > 120
@@ -126,48 +126,48 @@ export function buildUltraworkSection(
 
 export function buildAntiDuplicationSection(): string {
   return `<Anti_Duplication>
-## Anti-Duplication Rule (CRITICAL)
+## 反查重规则（关键）
 
-Once you delegate exploration to explore/librarian agents, **DO NOT perform the same search yourself**.
+一旦你将探索委派给 explore/librarian agent，**不要自己再执行相同的搜索**。
 
-### What this means:
+### 这意味着什么：
 
-**FORBIDDEN:**
-- After firing explore/librarian, manually grep/search for the same information
-- Re-doing the research the agents were just tasked with
-- "Just quickly checking" the same files the background agents are checking
+**禁止：**
+- 派出 explore/librarian 后，手动 grep/搜索相同的信息
+- 重复执行 agent 刚被委派的研究工作
+- "快速检查一下"后台 agent 正在检查的相同文件
 
-**ALLOWED:**
-- Continue with **non-overlapping work** - work that doesn't depend on the delegated research
-- Work on unrelated parts of the codebase
-- Preparation work (e.g., setting up files, configs) that can proceed independently
+**允许：**
+- 继续做**不重叠的工作** —— 不依赖于已委派研究的工作
+- 处理代码库中不相关的部分
+- 可以独立进行的准备工作（如设置文件、配置）
 
-### Wait for Results Properly:
+### 正确等待结果：
 
-When you need the delegated results but they're not ready:
+当你需要委派的结果但还没准备好时：
 
-1. **End your response** - do NOT continue with work that depends on those results
-2. **Wait for the completion notification** - the system will trigger your next turn
-3. **Then** collect results via \`background_output(task_id="...")\`
-4. **Do NOT** impatiently re-search the same topics while waiting
+1. **结束你的回复** —— 不要继续做依赖于那些结果的工作
+2. **等待完成通知** —— 系统会触发你的下一轮
+3. **然后**通过 \`background_output(task_id="...")\` 收集结果
+4. **不要**在等待时急躁地重新搜索相同主题
 
-### Why This Matters:
+### 为什么这很重要：
 
-- **Wasted tokens**: Duplicate exploration wastes your context budget
-- **Confusion**: You might contradict the agent's findings
-- **Efficiency**: The whole point of delegation is parallel throughput
+- **浪费 token**：重复搜索浪费你的上下文预算
+- **混乱**：你可能与 agent 的发现相矛盾
+- **效率**：委派的全部意义就在于并行吞吐量
 
-### Example:
+### 示例：
 
 \`\`\`typescript
-// WRONG: After delegating, re-doing the search
+// 错误做法：委派后自己重新搜索
 task(subagent_type="explore", run_in_background=true, ...)
-// Then immediately grep for the same thing yourself - FORBIDDEN
+// 然后立刻自己 grep 同样的东西 —— 禁止
 
-// CORRECT: Continue non-overlapping work
+// 正确做法：继续不重叠的工作
 task(subagent_type="explore", run_in_background=true, ...)
-// Work on a different, unrelated file while they search
-// End your response and wait for the notification
+// 在他们搜索时处理不同的、不相关的文件
+// 结束你的回复并等待通知
 \`\`\`
 </Anti_Duplication>`
 }

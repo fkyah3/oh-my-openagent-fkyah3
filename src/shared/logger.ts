@@ -4,7 +4,9 @@ import * as path from "path"
 
 import { LOG_FILENAME } from "./plugin-identity"
 
-const logFile = path.join(os.tmpdir(), LOG_FILENAME)
+// Unique log file per process using startup timestamp
+const startupTime = new Date().toISOString().replace(/[:.]/g, "-")
+const logFile = path.join(os.tmpdir(), `${startupTime}-${LOG_FILENAME}`)
 
 let buffer: string[] = []
 let flushTimer: ReturnType<typeof setTimeout> | null = null

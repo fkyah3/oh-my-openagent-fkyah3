@@ -1,27 +1,47 @@
-> [!TIP]
-> **Building in Public**
->
-> The maintainer builds and maintains oh-my-opencode in real-time with Jobdori, an AI assistant built on a heavily customized fork of OpenClaw.
-> Every feature, every fix, every issue triage — live in our Discord.
->
-> [![Building in Public](./.github/assets/building-in-public.png)](https://discord.gg/PUwSMR9XNk)
->
-> [**→ Watch it happen in #building-in-public**](https://discord.gg/PUwSMR9XNk)
+<p align="center"><b>fkyah3/oh-my-openagent-fkyah3</b><br>
+<code>Chinese system prompt · DeepSeek-native · AI-crafted</code></p>
 
-> [!NOTE]
->
-> [![Sisyphus Labs - Sisyphus is the agent that codes like your team.](./.github/assets/sisyphuslabs.png?v=2)](https://sisyphuslabs.ai)
-> > **We're building a fully productized version of Sisyphus to define the future of frontier agents. <br />Join the waitlist [here](https://sisyphuslabs.ai).**
+<p align="center">
+  <a href="./README.zh.md">简体中文</a> · <a href="./README.zht.md">繁體中文</a>
+</p>
 
-> [!TIP]
-> Be with us!
->
-> | [<img alt="Discord link" src="https://img.shields.io/discord/1452487457085063218?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=flat-square" width="156px" />](https://discord.gg/PUwSMR9XNk) | Join our [Discord community](https://discord.gg/PUwSMR9XNk) to connect with contributors and fellow `oh-my-opencode` users. |
-> | :-----| :----- |
-> | [<img alt="X link" src="https://img.shields.io/badge/Follow-%40justsisyphus-00CED1?style=flat-square&logo=x&labelColor=black" width="156px" />](https://x.com/justsisyphus) | News and updates for `oh-my-opencode` used to be posted on my X account. <br /> Since it was suspended mistakenly, [@justsisyphus](https://x.com/justsisyphus) now posts updates on my behalf. |
-> | [<img alt="GitHub Follow" src="https://img.shields.io/github/followers/code-yeongyu?style=flat-square&logo=github&labelColor=black&color=24292f" width="156px" />](https://github.com/code-yeongyu) | Follow [@code-yeongyu](https://github.com/code-yeongyu) on GitHub for more projects. |
+---
 
-<!-- <CENTERED SECTION FOR GITHUB DISPLAY> -->
+This is a personal fork of [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent). Every modification in this repository was implemented entirely by AI — **DeepSeek V4 Flash (thinking mode) / Sisyphus** — under human oversight.
+
+> **Code by: DeepSeek V4 Flash (thinking mode) / Sisyphus**  
+> **Human reviewer & direction: fkyah3**  
+> This fork is a live demonstration of what AI-built software looks like.
+
+---
+
+## What's Changed
+
+| Change | Area |
+|--------|------|
+| Full Chinese system prompt for Sisyphus (including all sub-agents and keyword-detector hooks) | **Prompt** |
+| `reasoning_content` circuit breaker — tool-pair-validator max 5 repairs per session | **Stability** |
+| Non-interactive-env hook cross-platform fix (Windows PowerShell + Git Bash compatibility) | **Win32** |
+
+## Details
+
+### Chinese System Prompt
+
+The entire Sisyphus agent prompt has been translated to Chinese — the main agent, all sub-agents (Oracle, Explorer, Librarian, etc.), and the dynamic keyword-detector injection prompts (analyze mode, search mode). This ensures the AI's reasoning chain stays in the user's native language.
+
+Branch: `feat/chinese-system-prompt`
+
+### Circuit Breaker
+
+The `tool-pair-validator` hook now has a per-session repair limit (max 5). When exceeded, it logs `[tool-pair-validator] Circuit breaker tripped` and stops all repairs for that session. Prevents infinite repair cascades during systemic errors.
+
+## Upstream
+
+Based on [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent). Changes merged periodically.
+
+---
+
+<p align="center"><i>Crafted by AI. Curated by human. Built for the real world.</i></p>
 
 <div align="center">
 

@@ -16,30 +16,30 @@ function buildSkillsSection(skills: AvailableSkill[]): string {
     .join(", ")
 
   if (customSkills.length > 0 && builtinSkills.length > 0) {
-    return `#### Available Skills (via \`skill\` tool)
+    return `#### 可用技能（通过 \`skill\` 工具）
 
-**Built-in**: ${builtinNames}
-**⚡ YOUR SKILLS (PRIORITY)**: ${customNames}
+**内置**: ${builtinNames}
+**⚡ 你的技能（高优先级）**: ${customNames}
 
-> User-installed skills OVERRIDE built-in defaults. ALWAYS prefer YOUR SKILLS when domain matches.
-> Full skill descriptions → use the \`skill\` tool to check before EVERY delegation.`
+> 用户安装的技能覆盖内置默认值。领域匹配时始终优先使用你的技能。
+> 完整技能描述 → 每次委派前使用 \`skill\` 工具检查。`
   }
 
   if (customSkills.length > 0) {
-    return `#### Available Skills (via \`skill\` tool)
+    return `#### 可用技能（通过 \`skill\` 工具）
 
-**⚡ YOUR SKILLS (PRIORITY)**: ${customNames}
+**⚡ 你的技能（高优先级）**: ${customNames}
 
-> User-installed skills OVERRIDE built-in defaults. ALWAYS prefer YOUR SKILLS when domain matches.
-> Full skill descriptions → use the \`skill\` tool to check before EVERY delegation.`
+> 用户安装的技能覆盖内置默认值。领域匹配时始终优先使用你的技能。
+> 完整技能描述 → 每次委派前使用 \`skill\` 工具检查。`
   }
 
   if (builtinSkills.length > 0) {
-    return `#### Available Skills (via \`skill\` tool)
+    return `#### 可用技能（通过 \`skill\` 工具）
 
-**Built-in**: ${builtinNames}
+**内置**: ${builtinNames}
 
-> Full skill descriptions → use the \`skill\` tool to check before EVERY delegation.`
+> 完整技能描述 → 每次委派前使用 \`skill\` 工具检查。`
   }
 
   return ""
@@ -66,13 +66,13 @@ export function buildCategorySkillsDelegationGuide(
 > **User-installed skills get PRIORITY.** When in doubt, INCLUDE rather than omit.`
       : ""
 
-  return `### Category + Skills Delegation System
+  return `### Category + Skills 委派系统
 
-**task() combines categories and skills for optimal task execution.**
+**task() 将分类与技能结合以实现最佳任务执行。**
 
-#### Available Categories (Domain-Optimized Models)
+#### 可用分类（领域优化模型）
 
-Each category is configured with a model optimized for that domain. Read the description to understand when to use it.
+每个分类都配置了针对该领域优化的模型。阅读描述以了解何时使用。
 
 ${categoryRows.join("\n")}
 
@@ -80,61 +80,61 @@ ${skillsSection}
 
 ---
 
-### MANDATORY: Category + Skill Selection Protocol
+### 强制性：分类 + 技能选择协议
 
-**STEP 1: Select Category**
-- Read each category's description
-- Match task requirements to category domain
-- Select the category whose domain BEST fits the task
+**第1步：选择分类**
+- 阅读每个分类的描述
+- 将任务需求匹配到分类领域
+- 选择领域**最适合**该任务的分类
 
-**STEP 2: Evaluate ALL Skills**
-Check the \`skill\` tool for available skills and their descriptions. For EVERY skill, ask:
-> "Does this skill's expertise domain overlap with my task?"
+**第2步：评估所有技能**
+使用 \`skill\` 工具检查可用技能及其描述。对每个技能问：
+> "这个技能的专业领域与我的任务重叠吗？"
 
-- If YES → INCLUDE in \`load_skills=[...]\`
-- If NO → OMIT (no justification needed)${customPriorityNote}
+- 是 → 包含在 \`load_skills=[...]\` 中
+- 否 → 省略（无需解释）${customPriorityNote}
 
 ---
 
-### Delegation Pattern
+### 委派模式
 
 \`\`\`typescript
 task(
   category="[selected-category]",
-  load_skills=["skill-1", "skill-2"],  // Include ALL relevant skills - ESPECIALLY user-installed ones
+  load_skills=["skill-1", "skill-2"],  // 包含所有相关技能 —— 特别是用户安装的技能
   prompt="..."
 )
 \`\`\`
 
-**ANTI-PATTERN (will produce poor results):**
+**反模式（会产生差的结果）：**
 \`\`\`typescript
-task(category="...", load_skills=[], run_in_background=false, prompt="...")  // Empty load_skills without justification
+task(category="...", load_skills=[], run_in_background=false, prompt="...")  // 空的 load_skills 且无理由
 \`\`\`
 
 ---
 
-### Category Domain Matching (ZERO TOLERANCE)
+### 分类领域匹配（零容忍）
 
-Every delegation MUST use the category that matches the task's domain. Mismatched categories produce measurably worse output because each category runs on a model optimized for that specific domain.
+每次委派必须使用与该任务领域匹配的分类。不匹配的分类会产生明显更差的输出，因为每个分类运行在针对该特定领域优化的模型上。
 
-**VISUAL WORK = ALWAYS \`visual-engineering\`. NO EXCEPTIONS.**
+**可视化工作 = 始终用 \`visual-engineering\`。没有例外。**
 
-Any task involving UI, UX, CSS, styling, layout, animation, design, or frontend components MUST go to \`visual-engineering\`. Never delegate visual work to \`quick\`, \`unspecified-*\`, or any other category.
+任何涉及 UI、UX、CSS、样式、布局、动画、设计或前端的任务必须使用 \`visual-engineering\`。永远不要将可视化工作委派给 \`quick\`、\`unspecified-*\` 或其他任何分类。
 
 \`\`\`typescript
-// CORRECT: Visual work → visual-engineering category
-task(category="visual-engineering", load_skills=["frontend-ui-ux"], prompt="Redesign the sidebar layout with new spacing...")
+// 正确：可视化工作 → visual-engineering 分类
+task(category="visual-engineering", load_skills=["frontend-ui-ux"], prompt="用新的间距重新设计侧边栏布局...")
 
-// WRONG: Visual work in wrong category - WILL PRODUCE INFERIOR RESULTS
-task(category="quick", load_skills=[], prompt="Redesign the sidebar layout with new spacing...")
+// 错误：可视化工作在错误的分类中 —— 会产生较差的结果
+task(category="quick", load_skills=[], prompt="用新的间距重新设计侧边栏布局...")
 \`\`\`
 
-| Task Domain | MUST Use Category |
+| 任务领域 | 必须使用的分类 |
 |---|---|
-| UI, styling, animations, layout, design | \`visual-engineering\` |
-| Hard logic, architecture decisions, algorithms | \`ultrabrain\` |
-| Autonomous research + end-to-end implementation | \`deep\` |
-| Single-file typo, trivial config change | \`quick\` |
+| UI、样式、动画、布局、设计 | \`visual-engineering\` |
+| 硬逻辑、架构决策、算法 | \`ultrabrain\` |
+| 自主研究 + 端到端实施 | \`deep\` |
+| 单文件 typo、琐碎配置变更 | \`quick\` |
 
-**When in doubt about category, it is almost never \`quick\` or \`unspecified-*\`. Match the domain.**`
+**当不确定分类时，几乎从来不是 \`quick\` 或 \`unspecified-*\`。匹配领域。**`
 }

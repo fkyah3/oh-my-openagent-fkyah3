@@ -101,6 +101,11 @@ export function isGlmModel(model: string): boolean {
   return modelName.includes("glm");
 }
 
+export function isDeepSeekModel(model: string): boolean {
+  const modelName = extractModelName(model).toLowerCase();
+  return modelName.includes("deepseek");
+}
+
 export function isGeminiModel(model: string): boolean {
   if (GEMINI_PROVIDERS.some((prefix) => model.startsWith(prefix))) return true;
 
