@@ -169,15 +169,49 @@ function repairMissingToolResults(messages: MessageWithParts[], assistantIndex: 
   })
 }
 
+// ── Circuit breaker ────────────────────────────────────────────────
+// Prevents infinite repair cascades when a systemic error (e.g. missing
+// reasoning_content on every API call) causes the same session's tool
+// results to be repeatedly lost. Across all tabs in a single process,
+// the same map is shared, so runaway repair loops are bounded globally.
+const MAX_REPAIRS_PER_SESSION = 5
+const repairCountBySession = new Map<string, number>()
+
+function getSessionId(messages: MessageWithParts[]): string | undefined {
+  for (const m of messages) {
+    const sid = (m.info as { sessionID?: string }).sessionID
+    if (typeof sid === "string" && sid.length > 0) return sid
+  }
+  return undefined
+}
+
 export function createToolPairValidatorHook(): MessagesTransformHook {
   return {
     "experimental.chat.messages.transform": async (_input, output) => {
+      const sessionId = getSessionId(output.messages)
+      if (!sessionId) return
+
+      const repairsSoFar = repairCountBySession.get(sessionId) ?? 0
+      if (repairsSoFar >= MAX_REPAIRS_PER_SESSION) {
+        log(
+          `[tool-pair-validator] Circuit breaker tripped for session ${sessionId}: ${repairsSoFar} repairs exceeds max (${MAX_REPAIRS_PER_SESSION}). Skipping all repairs.`,
+        )
+        repairCountBySession.delete(sessionId)
+        return
+      }
+
+      let repaired = 0
       for (let i = 0; i < output.messages.length; i++) {
         if (output.messages[i].info.role !== "assistant") {
           continue
         }
 
         repairMissingToolResults(output.messages, i)
+        repaired++
+      }
+
+      if (repaired > 0) {
+        repairCountBySession.set(sessionId, repairsSoFar + repaired)
       }
     },
   }
