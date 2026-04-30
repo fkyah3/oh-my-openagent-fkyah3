@@ -1,3 +1,9 @@
+> **⚠️ 已归档 — 不再维护更新。**  
+> 本项目已归档，所有开发已迁移至 [fkyah3/opencode-yg](https://github.com/fkyah3/opencode-yg) 进行完全重构。  
+> 本仓库仅保留供参考，不再进行任何功能更新或 bug 修复。
+
+---
+
 <p align="center"><b>fkyah3/oh-my-openagent-fkyah3</b><br>
 <code>中文系统提示词 · DeepSeek 原生适配 · AI 构建</code></p>
 
